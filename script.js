@@ -1,10 +1,10 @@
 var message = document.querySelector("h1");
-var diceOneImage = document.querySelector("#one");
-var diceTwoImage = document.querySelector("#two");
+var diceOneImage = document.querySelectorAll("img")[0];
+var diceTwoImage = document.querySelectorAll("img")[1];
 
 if (!sessionStorage.getItem("refresh")) {
     sessionStorage.setItem("refresh", "true");
-    message.innerText = "Refresh Me";
+    message.innerText = "🔃Refresh Me";
     diceOneImage.src = "images/dice6.png";
     diceTwoImage.src = "images/dice6.png";
 } else {
@@ -19,7 +19,7 @@ function rollDice() {
     diceTwoImage.src = "images/dice" + diceTwo + ".png";
 
     if (diceOne === diceTwo) {
-        message.innerText = "Draw!";
+        message.innerText = "🚩Draw!🚩";
     } else if (diceOne > diceTwo) {
         message.innerText = "🚩Player 1 Wins!"
     } else {
