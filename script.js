@@ -4,39 +4,25 @@ var diceTwoImage = document.querySelector("#two");
 
 if (!sessionStorage.getItem("refresh")) {
     sessionStorage.setItem("refresh", "true");
-    sessionStorage.setItem("draw", "true");
     message.innerText = "Refresh Me";
-    setImage(diceOneImage, 6);
-    setImage(diceTwoImage, 6);
+    diceOneImage.src = "images/dice6.png";
+    diceTwoImage.src = "images/dice6.png";
 } else {
-    if (sessionStorage.getItem("draw") === "false") {
-        sessionStorage.setItem("draw", "true");
-        message.innerText = "Draw!"
-        setImage(diceOneImage, 1);
-        setImage(diceTwoImage, 1);
-    } else {
-        sessionStorage.setItem("draw", "false");
-        draw();
-    }
+    rollDice();
 }
 
-function draw() {
+function rollDice() {
     var diceOne = Math.ceil(Math.random() * 6);
     var diceTwo = Math.ceil(Math.random() * 6);
 
-    if (diceOne === diceTwo) {
-        draw();
-    } else {
-        setImage(diceOneImage, diceOne);
-        setImage(diceTwoImage, diceTwo);
-        if (diceOne > diceTwo) {
-            message.innerText = "Player 1 Wins!";
-        } else {
-            message.innerText = "Player 2 Wins!";
-        }
-    }
-}
+    diceOneImage.src = "images/dice" + diceOne + ".png";
+    diceTwoImage.src = "images/dice" + diceTwo + ".png";
 
-function setImage(dice, face) {
-    dice.src = "images/dice" + face + ".png";
+    if (diceOne === diceTwo) {
+        message.innerText = "Draw!";
+    } else if (diceOne > diceTwo) {
+        message.innerText = "🚩Player 1 Wins!"
+    } else {
+        message.innerText = "Player 2 Wins!🚩"
+    }
 }
